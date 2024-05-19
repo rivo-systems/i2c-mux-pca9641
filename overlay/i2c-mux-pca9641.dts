@@ -1,0 +1,28 @@
+// Definitions for NXP PCA9645A I2C mux on ARM I2C bus.
+/dts-v1/;
+/plugin/;
+
+/{
+	compatible = "brcm,bcm2708";
+
+	fragment@0 {
+		target = <&i2c1>;
+		__overlay__ {
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			i2cmux: i2c-arbitrator@70 {
+				#address-cells = <1>;
+				#size-cells = <0>;
+				compatible = "nxp,pca9641";
+				reg = <0x70>;
+
+				pcf2127: rtc@51 {
+					compatible = "nxp,pcf2127";
+					reg = <0x51>;
+					status = "okay";
+				};
+			};
+		};
+	};
+};
